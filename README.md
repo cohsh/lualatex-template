@@ -1,1 +1,2 @@
-# My LaTeX Frame
+# My $\LaTeX$ Frame
+"Empty" $\LaTeX$ files.
