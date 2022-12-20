@@ -1,3 +1,3 @@
 #!/bin/sh -eu
 
-cp -r template local
+cp -r template projects/$1
