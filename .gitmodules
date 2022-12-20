@@ -1,0 +1,3 @@
+[submodule "latex-projects"]
+	path = projects
+	url = git@git-pub:cohsh/latex-projects.git
