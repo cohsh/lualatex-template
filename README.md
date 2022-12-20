@@ -1,2 +1,1 @@
-# My $\LaTeX$ Frame
-"Empty" $\LaTeX$ files.
+# My $\LaTeX$ Template
