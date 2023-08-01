@@ -1,0 +1,35 @@
+\documentclass[10pt]{beamer}
+\usetheme{Berkeley}
+\usecolortheme[RGB={0,91,152}]{structure}
+
+\usepackage{sty/cohsh-common}
+\usepackage{sty/cohsh-science}
+\usepackage{sty/cohsh-atomic}
+
+\graphicspath{{./fig/}}
+
+\AtBeginSection[]{
+    \begin{frame}
+        \vfill
+        \centering
+        \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+            \usebeamerfont{title}\insertsectionhead\par%
+        \end{beamercolorbox}
+        \vfill
+    \end{frame}
+}
+
+\title{}
+%\subtitle{}
+\institute{}
+\author{}
+\date{\today}
+
+\begin{document}
+
+\subfile{sub/0}
+\subfile{sub/1}
+
+\subfile{sub/appendix}
+
+\end{document}
