@@ -19,6 +19,14 @@
     \end{frame}
 }
 
+\begin{luacode*}
+    function io.file_exists(path)
+        local fh = io.open(path, "rb")
+        if fh then fh:close() end
+        return fh ~= nil
+    end
+\end{luacode*}
+
 \title{}
 %\subtitle{}
 \institute{}
@@ -27,8 +35,14 @@
 
 \begin{document}
 
-\subfile{sub/0}
-\subfile{sub/1}
+\begin{luacode*}
+    for i = 0 , 10 do
+        local path = "sub/"..i..".tex"
+        if io.file_exists(path) then
+            tex.sprint("\\subfile{sub/"..i.."}")
+        end
+    end
+\end{luacode*}
 
 \subfile{sub/appendix}
 
