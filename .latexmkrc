@@ -1,9 +1,9 @@
 #!usr/bin/env perl
-$latex = 'lualatex -synctex=1 -interaction=nonstopmode';
+$latex = 'lualatex -synctex=1 -interaction=nonstopmode -file-line-error %S';
 $bibtex = 'bibtex';
 $makeindex = 'mendex %O -o %D %S';
 $max_repeat = 5;
-$out_dir = '.cache';
+$out_dir = 'cache';
 $pdf_mode = 4;
 $pdf_view_file_via_temporary = 0;
 

@@ -1,0 +1,41 @@
+\documentclass[11pt, a4paper]{ltjsbook}
+\usepackage{sty/cohsh-common}
+
+\date{\today}
+\graphicspath{{./fig/}}
+
+\title{}
+\author{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\begin{luacode*}
+    require "utility/core"
+
+    local n_include_min = 0
+    local n_include_max = 10
+
+    local path_sub = "./sub"
+    local prefix_part = "part"
+    local prefix_chapter = "chapter"
+    local prefix_section = "section"
+
+    for i = n_include_min, n_include_max do
+        for j = n_include_min, n_include_max do
+            for k = n_include_min, n_include_max do
+                local path_file = path_sub .. "/" .. prefix_part .. i .. "/" .. prefix_chapter .. j .. "/" .. prefix_section .. k .. ".tex"
+                if file_exists(path_file) then
+                    tex.sprint(command("subfile", path_file))
+                end
+            end
+        end
+    end
+\end{luacode*}
+
+\bibliography{main}
+\bibliographystyle{unsrt}
+
+\end{document}
