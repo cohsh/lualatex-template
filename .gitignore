@@ -1,5 +1,3 @@
-cache/
-.cache/
 *.aux
 *.bbl
 *.blg
@@ -10,3 +8,9 @@ cache/
 *.synctex.gz
 *.toc
 *.out
+
+cache/
+.cache/
+
+main.*
+sub/
