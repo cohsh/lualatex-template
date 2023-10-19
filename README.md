@@ -1,8 +1,8 @@
 # My $\LaTeX$ Template
 ## Main Components
 - sty/: style file
-- templates/: "empty" `.tex` files
-- utility/: Lua code
+- templates/: templates files
+- utility/: utility Lua code
 - Makefile
 
 ## Supported Class Files
@@ -12,17 +12,17 @@
 
 ## Usage
 ### Example (beamer)
-- Generate `main.tex`, `main.bib`, and `sub/`
+- Generate `main.tex`, `main.bib`, and `sub/` in `src-test/`
 ```shell
-make beamer
+make NAME="src-test" beamer
 ```
 
 - Build
 ```shell
-make
+make NAME="src-test"
 ```
 
 - Clean
 ```shell
-make clean
+make NAME="src-test" clean
 ```
