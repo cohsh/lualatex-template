@@ -1,7 +1,7 @@
 # My $\LaTeX$ Template
 ## Main Components
 - sty/: style file
-- templates/: templates files
+- templates/: template files
 - utility/: utility Lua code
 - Makefile
 
