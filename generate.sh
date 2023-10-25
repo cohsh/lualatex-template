@@ -26,9 +26,9 @@ EOF
 )
 fi
 
-books=("book", "ltjsbook")
-articles=("article", "ltjsarticle")
-reports=("report", "ltjsreport")
+books=("book" "ltjsbook")
+articles=("article" "ltjsarticle")
+reports=("report" "ltjsreport")
 
 load="beamer"
 
