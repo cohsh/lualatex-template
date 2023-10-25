@@ -27,6 +27,17 @@ function load.SubFile:book()
     end
 end
 
+function load.SubFile:report()
+    for i = self.n_range_min, self.n_range_max do
+        for j = self.n_range_min, self.n_range_max do
+            local path = self.sub .. "/" .. self.chapter .. i .. "/" .. self.section .. j .. ".tex"
+            if core.file_exists(path) then
+                tex.sprint(core.command("subfile", path))
+            end
+        end
+    end
+end
+
 function load.SubFile:article()
     for i = self.n_range_min, self.n_range_max do
         for j = self.n_range_min, self.n_range_max do
