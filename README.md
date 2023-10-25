@@ -1,9 +1,10 @@
-# My $\LaTeX$ Template
+# LaTeX Template
+A LuaLaTeX Template with Subfiles Package
 ## Main Components
-- sty/: style file
-- templates/: template files
-- utility/: utility Lua code
-- Makefile
+- `sty/`: a style file
+- `templates/`: template files
+- `utility/`: utility Lua codes
+- `Makefile`
 
 ## Supported Class Files
 - ltjsbook
@@ -11,18 +12,29 @@
 - beamer
 
 ## Usage
-### Example (beamer)
-- Generate `main.tex`, `main.bib`, and `sub/` in `src-test/`
-```shell
-make NAME="src-test" beamer
-```
+### Examples
+- Generate `document-hogehoge/`
+  - For ltjsbook
+  ```shell
+  make ltjsarticle NAME="document-hogehoge"
+  ```  
+
+  - For ltjsarticle
+  ```shell
+  make ltjsarticle NAME="document-hogehoge"
+  ```  
+
+  - For beamer
+  ```shell
+  make beamer NAME="document-hogehoge"
+  ```
 
 - Build
 ```shell
-make NAME="src-test"
+make NAME="document-hogehoge"
 ```
 
 - Clean
 ```shell
-make NAME="src-test" clean
+make clean NAME="document-hogehoge"
 ```
