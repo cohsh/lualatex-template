@@ -4,29 +4,36 @@ A LuaLaTeX Template with Subfiles Package
 - `sty/`: a style file
 - `templates/`: template files
 - `utility/`: utility Lua codes
+- `input.lua`: an input file
 - `Makefile`
 
 ## Supported Class Files
-- ltjsbook
-- ltjsarticle
-- beamer
+- Basic
+  - book
+  - article
+  - report
+- Slide
+  - beamer
+- Japanese
+  - ltjsbook
+  - ltjsarticle
+  - ltjsreport
 
 ## Usage
 ### Examples
 - Generate `document-hogehoge/`
-  - For ltjsbook
+  - For article
   ```shell
-  make ltjsarticle NAME="document-hogehoge"
+  make article NAME="document-hogehoge"
   ```  
-
-  - For ltjsarticle
-  ```shell
-  make ltjsarticle NAME="document-hogehoge"
-  ```  
-
   - For beamer
   ```shell
   make beamer NAME="document-hogehoge"
+  ```
+
+  - For ltjsbook
+  ```shell
+  make ltjsbook NAME="document-hogehoge"
   ```
 
 - Build
