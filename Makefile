@@ -19,39 +19,39 @@ common:
 
 # Basic
 book: common
-	@cp templates/book.tex $(NAME)/main.tex
+	@./generate.sh book > $(NAME)/main.tex
 	@mkdir -p $(NAME)/sub/part1/chapter1
 	@for i in `seq $(N_INCLUDE_MIN) $(N_INCLUDE_MAX)`; do echo $(SUB_BOOK) > $(NAME)/sub/part1/chapter1/section$$i.tex; done
 
 report: common
-	@cp templates/report.tex $(NAME)/main.tex
+	@./generate.sh report > $(NAME)/main.tex
 	@mkdir $(NAME)/sub/chapter1
 	@for i in `seq $(N_INCLUDE_MIN) $(N_INCLUDE_MAX)`; do echo $(SUB_REPORT) > $(NAME)/sub/chapter1/section$$i.tex; done
 
 article: common
-	@cp templates/article.tex $(NAME)/main.tex
+	@./generate.sh article > $(NAME)/main.tex
 	@mkdir $(NAME)/sub/part1
 	@for i in `seq $(N_INCLUDE_MIN) $(N_INCLUDE_MAX)`; do echo $(SUB_ARTICLE) > $(NAME)/sub/part1/section$$i.tex; done
 
 # For Japanese Documents
 ltjsbook: common
-	@cp templates/ltjsbook.tex $(NAME)/main.tex
+	@./generate.sh ltjsbook > $(NAME)/main.tex
 	@mkdir -p $(NAME)/sub/part1/chapter1
 	@for i in `seq $(N_INCLUDE_MIN) $(N_INCLUDE_MAX)`; do echo $(SUB_BOOK) > $(NAME)/sub/part1/chapter1/section$$i.tex; done
 
 ltjsreport: common
-	@cp templates/ltjsreport.tex $(NAME)/main.tex
+	@./generate.sh ltjsreport > $(NAME)/main.tex
 	@mkdir $(NAME)/sub/chapter1
 	@for i in `seq $(N_INCLUDE_MIN) $(N_INCLUDE_MAX)`; do echo $(SUB_REPORT) > $(NAME)/sub/chapter1/section$$i.tex; done
 
 ltjsarticle: common
-	@cp templates/ltjsarticle.tex $(NAME)/main.tex
+	@./generate.sh ltjsarticle > $(NAME)/main.tex
 	@mkdir $(NAME)/sub/part1
 	@for i in `seq $(N_INCLUDE_MIN) $(N_INCLUDE_MAX)`; do echo $(SUB_ARTICLE) > $(NAME)/sub/part1/section$$i.tex; done
 
 # For Slides
 beamer: common
-	@cp templates/beamer.tex $(NAME)/main.tex
+	@./generate.sh beamer > $(NAME)/main.tex
 	@for i in `seq $(N_INCLUDE_MIN) $(N_INCLUDE_MAX)`; do echo $(SUB_BEAMER) > $(NAME)/sub/section$$i.tex; done
 
 clean:

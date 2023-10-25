@@ -1,5 +1,14 @@
-\documentclass[10pt]{beamer}
-\usepackage{../sty/cohsh-common}
+#!/bin/zsh
+
+class=$1
+option=""
+optional_preamble=""
+
+if [ "$class" != "beamer" ]; then
+    option="11pt, a4paper"
+else
+    option="11pt"
+    optional_preamble=$(cat << EOF
 \usetheme{Berkeley}
 \usecolortheme[RGB={0,91,152}]{structure}
 
@@ -13,6 +22,29 @@
         \vfill
     \end{frame}
 }
+EOF
+)
+fi
+
+books=("book", "ltjsbook")
+articles=("article", "ltjsarticle")
+reports=("report", "ltjsreport")
+
+load="beamer"
+
+if [[ "${books[(Ie)$class]}" -ne 0 ]]; then
+    load="book"
+elif [[ "${articles[(Ie)$class]}" -ne 0 ]]; then
+    load="article"
+elif [[ "${reports[(Ie)$class]}" -ne 0 ]]; then
+    load="report"
+fi
+
+cat << EOF
+\documentclass[$option]{$class}
+\usepackage{../sty/cohsh-common}
+
+$optional_preamble
 
 \begin{luacode*}
     local core = require("../utility/core")
@@ -30,18 +62,17 @@
         maketitle:execute()
     \end{luacode*}
 
-    \begin{frame}{Contents}
-        \tableofcontents
-    \end{frame}
+    \tableofcontents
 
     \begin{luacode*}
         local core = require("../utility/core")
         local load = require("../utility/load")
         local subfile = load.SubFile:new("sub", 0, 10)
-        subfile:beamer()
+        subfile:$load()
     \end{luacode*}
-
+    
     \bibliography{main}
     \bibliographystyle{unsrt}
 
 \end{document}
+EOF
