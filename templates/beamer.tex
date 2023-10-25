@@ -29,20 +29,10 @@
 \end{frame}
 
 \begin{luacode*}
-    require "../utility/core"
-
-    local n_include_min = 0
-    local n_include_max = 10
-
-    local path_sub = "./sub"
-    local prefix_section = "section"
-
-    for i = n_include_min, n_include_max do
-        local path_file = path_sub .. "/" .. prefix_section .. i .. ".tex"
-        if file_exists(path_file) then
-            tex.sprint(command("subfile", path_file))
-        end
-    end
+    local core = require("../utility/core")
+    local load = require("../utility/load")
+    local subfile = load.SubFile:new("sub", 0, 10)
+    subfile:beamer()
 \end{luacode*}
 
 \bibliography{main}
