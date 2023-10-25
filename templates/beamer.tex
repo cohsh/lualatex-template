@@ -14,28 +14,34 @@
     \end{frame}
 }
 
-\date{\today}
-\graphicspath{{./fig/}}
+\begin{luacode*}
+    local core = require("../utility/core")
+    local input = require("./input")
 
-\title{}
-\author{}
+    maketitle = require("../utility/maketitle")
+    maketitle:set()
+\end{luacode*}
+
+\graphicspath{{./fig/}}
 
 \begin{document}
 
-\maketitle
+    \begin{luacode*}
+        maketitle:execute()
+    \end{luacode*}
 
-\begin{frame}{Contents}
-    \tableofcontents
-\end{frame}
+    \begin{frame}{Contents}
+        \tableofcontents
+    \end{frame}
 
-\begin{luacode*}
-    local core = require("../utility/core")
-    local load = require("../utility/load")
-    local subfile = load.SubFile:new("sub", 0, 10)
-    subfile:beamer()
-\end{luacode*}
+    \begin{luacode*}
+        local core = require("../utility/core")
+        local load = require("../utility/load")
+        local subfile = load.SubFile:new("sub", 0, 10)
+        subfile:beamer()
+    \end{luacode*}
 
-\bibliography{main}
-\bibliographystyle{unsrt}
+    \bibliography{main}
+    \bibliographystyle{unsrt}
 
 \end{document}

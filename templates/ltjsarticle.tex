@@ -1,25 +1,32 @@
 \documentclass[11pt, a4paper]{ltjsarticle}
 \usepackage{../sty/cohsh-common}
 
-\date{\today}
-\graphicspath{{./fig/}}
+\begin{luacode*}
+    local core = require("../utility/core")
+    local input = require("./input")
 
-\title{}
-\author{}
+    maketitle = require("../utility/maketitle")
+    maketitle:set()
+\end{luacode*}
+
+\graphicspath{{./fig/}}
 
 \begin{document}
 
-\maketitle
-\tableofcontents
+    \begin{luacode*}
+        maketitle:execute()
+    \end{luacode*}
 
-\begin{luacode*}
-    local core = require("../utility/core")
-    local load = require("../utility/load")
-    local subfile = load.SubFile:new("sub", 0, 10)
-    subfile:article()
-\end{luacode*}
+    \tableofcontents
 
-\bibliography{main}
-\bibliographystyle{unsrt}
+    \begin{luacode*}
+        local core = require("../utility/core")
+        local load = require("../utility/load")
+        local subfile = load.SubFile:new("sub", 0, 10)
+        subfile:article()
+    \end{luacode*}
+
+    \bibliography{main}
+    \bibliographystyle{unsrt}
 
 \end{document}

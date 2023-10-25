@@ -13,6 +13,8 @@ compile:
 common:
 	mkdir $(NAME);
 	@cd $(NAME); touch main.bib; mkdir sub; mkdir fig;
+	@cp .latexmkrc $(NAME)/.
+	@cp input.lua $(NAME)/.
 
 ltjsbook: common
 	@cp templates/ltjsbook.tex $(NAME)/main.tex
