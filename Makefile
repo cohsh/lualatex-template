@@ -17,6 +17,23 @@ common:
 	@cp .latexmkrc $(NAME)/.
 	@cp input.lua $(NAME)/.
 
+# Basic
+book: common
+	@cp templates/book.tex $(NAME)/main.tex
+	@mkdir -p $(NAME)/sub/part1/chapter1
+	@for i in `seq $(N_INCLUDE_MIN) $(N_INCLUDE_MAX)`; do echo $(SUB_BOOK) > $(NAME)/sub/part1/chapter1/section$$i.tex; done
+
+report: common
+	@cp templates/report.tex $(NAME)/main.tex
+	@mkdir $(NAME)/sub/chapter1
+	@for i in `seq $(N_INCLUDE_MIN) $(N_INCLUDE_MAX)`; do echo $(SUB_REPORT) > $(NAME)/sub/chapter1/section$$i.tex; done
+
+article: common
+	@cp templates/article.tex $(NAME)/main.tex
+	@mkdir $(NAME)/sub/part1
+	@for i in `seq $(N_INCLUDE_MIN) $(N_INCLUDE_MAX)`; do echo $(SUB_ARTICLE) > $(NAME)/sub/part1/section$$i.tex; done
+
+# For Japanese Documents
 ltjsbook: common
 	@cp templates/ltjsbook.tex $(NAME)/main.tex
 	@mkdir -p $(NAME)/sub/part1/chapter1
@@ -32,6 +49,7 @@ ltjsarticle: common
 	@mkdir $(NAME)/sub/part1
 	@for i in `seq $(N_INCLUDE_MIN) $(N_INCLUDE_MAX)`; do echo $(SUB_ARTICLE) > $(NAME)/sub/part1/section$$i.tex; done
 
+# For Slides
 beamer: common
 	@cp templates/beamer.tex $(NAME)/main.tex
 	@for i in `seq $(N_INCLUDE_MIN) $(N_INCLUDE_MAX)`; do echo $(SUB_BEAMER) > $(NAME)/sub/section$$i.tex; done
