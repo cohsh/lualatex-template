@@ -1,4 +1,7 @@
 # LaTeX Template
+![Static Badge](https://img.shields.io/badge/LuaLaTeX-green?logo=latex)
+![GitHub top language](https://img.shields.io/github/languages/top/cohsh/latex-template?logo=lua)
+
 A LuaLaTeX Template with Subfiles Package
 ## Components
 ```
