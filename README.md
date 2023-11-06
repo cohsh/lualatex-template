@@ -51,7 +51,7 @@ make article NAME="test-document"
     input.title = ""
     input.author = ""
   ```
-  #### 2.2 Please edit `sub/part1/section*.tex`
+  #### 2.2 Please write the text as you like in `sub/part1/section*.tex`.
 
 ### 3. Build
   #### At `.`
