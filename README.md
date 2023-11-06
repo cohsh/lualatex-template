@@ -61,7 +61,6 @@ make article NAME="test-document"
 
   #### At `./test-document`
   ```shell
-  cd test-document
   latexmk
   ```
 
