@@ -4,19 +4,12 @@
 
 A LuaLaTeX Template with Subfiles Package
 
-## Supported Classes
-- Basic
-  - `book.cls`
-  - `article.cls`
-  - `report.cls`
+## Features
 
-- Slide
-  - `beamer.cls`
-
-- Japanese
-  - `ltjsbook.cls`
-  - `ltjsarticle.cls`
-  - `ltjsreport.cls`
+- [x] The text is written in sub `.tex` files.
+- [x] Automatic generation of main and sub `.tex` files
+- [x] Automatic loads of sub `.tex` files by using `luacode*`
+- [x] Not redundant `\usepackage` (`cohsh-common.sty` only)
 
 ## Components
 ```
@@ -66,7 +59,21 @@ make article NAME="test-document"
 
 The generated `main.pdf` is at `./test-document/cache/main.pdf`
 
-## Files
+## Supported Classes
+- Basic
+  - `book.cls`
+  - `article.cls`
+  - `report.cls`
+
+- Slide
+  - `beamer.cls`
+
+- Japanese
+  - `ltjsbook.cls`
+  - `ltjsarticle.cls`
+  - `ltjsreport.cls`
+
+## Note
 ### Generated files for `article.cls`
 ```
 .
