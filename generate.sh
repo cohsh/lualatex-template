@@ -47,10 +47,10 @@ cat << EOF
 $optional_preamble
 
 \begin{luacode*}
-    local core = require("../utility/core")
+    local core = require("./utility/core")
     local input = require("./input")
 
-    maketitle = require("../utility/maketitle")
+    maketitle = require("./utility/maketitle")
     maketitle:set()
 \end{luacode*}
 
@@ -65,8 +65,8 @@ $optional_preamble
     \tableofcontents
 
     \begin{luacode*}
-        local core = require("../utility/core")
-        local load = require("../utility/load")
+        local core = require("./utility/core")
+        local load = require("./utility/load")
         local subfile = load.SubFile:new("sub", 0, 10)
         subfile:$load()
     \end{luacode*}
