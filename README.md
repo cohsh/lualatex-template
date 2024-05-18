@@ -9,7 +9,7 @@ A LuaLaTeX Template with Subfiles Package
 - [x] The text is written in sub `.tex` files.
 - [x] Automatic generation of main and sub `.tex` files
 - [x] Automatic loads of sub `.tex` files by using `luacode*`
-- [x] Not redundant `\usepackage` (`cohsh-common.sty` only)
+- [x] Not redundant `\usepackage` (`./sty/common.sty` only)
 
 ## Components
 ```
@@ -17,47 +17,52 @@ A LuaLaTeX Template with Subfiles Package
 ├── Makefile
 ├── README.md
 ├── generate.sh
-├── input.lua
+├── parts
+│   └── sub
+│       ├── article.tex
+│       ├── beamer.tex
+│       ├── book.tex
+│       └── report.tex
 ├── sty
-│   └── cohsh-common.sty
+│   └── common.sty
 └── utility
     ├── core.lua
     ├── figure.lua
-    ├── load.lua
-    └── maketitle.lua
+    └── load.lua
 ```
 
-- `generate.sh`: used in `Makefile`
-- `input.lua`: an input file for `\maketitle`
-- `sty/cohsh-common.sty`: listing of `\usepackage`
+- `generate.sh`: use for generating `main.tex` in `Makefile`
+- `parts/sub/*`: use for generating sub `.tex` files in `Makefile`
+- `sty/common.sty`: listing of `\usepackage`
 - `utility/*`: utility Lua codes
 
 ## Usage for `article.cls`
-### 1. Generate `test-document/`
+### 1. Generate `src-test/`
 ```shell
-make article NAME="test-document"
+make article NAME="src-test"
 ```  
 
 ### 2. Edit
-  #### 2.1 Please edit the following lines in `./test-document/input.lua` for `\maketitle`.
-  ```lua
-    input.title = ""
-    input.author = ""
+  #### 2.1 Please edit `main.tex` for `\maketitle`.
+  ```latex
+  \title{}
+  \author{}
+  \date{\today}
   ```
-  #### 2.2 Please write the text as you like in `sub/part1/section*.tex`.
+  #### 2.2 Please edit `sub/*` as you like.
 
 ### 3. Build
   #### At `.`
   ```shell
-  make NAME="test-document"
+  make NAME="src-test"
   ```
 
-  #### At `./test-document`
+  #### At `./src-test`
   ```shell
   latexmk
   ```
 
-The generated `main.pdf` is at `./test-document/cache/main.pdf`
+The generated `main.pdf` is at `./src-test/cache/main.pdf`
 
 ## Supported Classes
 - Basic
@@ -78,53 +83,54 @@ The generated `main.pdf` is at `./test-document/cache/main.pdf`
 ```
 .
 ├── fig
-├── input.lua
 ├── main.bib
 ├── main.tex
-└── sub
-    └── part1
-        ├── section0.tex
-        ├── section1.tex
-        ├── section10.tex
-        ├── section2.tex
-        ├── section3.tex
-        ├── section4.tex
-        ├── section5.tex
-        ├── section6.tex
-        ├── section7.tex
-        ├── section8.tex
-        └── section9.tex
+├── sty
+│   └── common.sty
+├── sub
+│   └── part1
+│       ├── section0.tex
+│       ├── section1.tex
+│       ├── section10.tex
+│       ├── section2.tex
+│       ├── section3.tex
+│       ├── section4.tex
+│       ├── section5.tex
+│       ├── section6.tex
+│       ├── section7.tex
+│       ├── section8.tex
+│       └── section9.tex
+└── utility
+    ├── core.lua
+    ├── figure.lua
+    └── load.lua
 ```
 
 - `main.tex`
 
 ```latex
 \documentclass[11pt, a4paper]{article}
-\usepackage{../sty/cohsh-common}
+\usepackage{./sty/common}
 
 
 
 \begin{luacode*}
-    local core = require("../utility/core")
-    local input = require("./input")
-
-    maketitle = require("../utility/maketitle")
-    maketitle:set()
+    local core = require("./utility/core")
 \end{luacode*}
 
 \graphicspath{{./fig/}}
 
-\begin{document}
+\title{}
+\author{}
+\date{\today}
 
-    \begin{luacode*}
-        maketitle:execute()
-    \end{luacode*}
+\begin{document}
+    \maketitle
 
     \tableofcontents
 
     \begin{luacode*}
-        local core = require("../utility/core")
-        local load = require("../utility/load")
+        local load = require("./utility/load")
         local subfile = load.SubFile:new("sub", 0, 10)
         subfile:article()
     \end{luacode*}

@@ -12,7 +12,6 @@ common:
 	mkdir $(NAME);
 	@cd $(NAME); touch main.bib; mkdir sub; mkdir fig;
 	@cp .latexmkrc $(NAME)/.
-	@cp input.lua $(NAME)/.
 	@cp -r utility/ ${NAME}/.
 	@cp -r sty/ ${NAME}/.
 	@cp .gitignore ${NAME}/.
