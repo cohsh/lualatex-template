@@ -10,9 +10,5 @@
 *.out
 
 cache/
-.cache/
-
-main.*
-sub/
 
 src*/
