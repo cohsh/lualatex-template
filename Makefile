@@ -5,11 +5,6 @@ N_INCLUDE_MAX = 10
 
 PARTS_SUB_DIR = parts/sub
 
-SUB_BEAMER = '\documentclass[../main]{subfiles}\n\\begin{document}\n\n\\end{document}'
-SUB_ARTICLE = '\documentclass[../../main]{subfiles}\n\\begin{document}\n\n\\end{document}'
-SUB_REPORT = '\documentclass[../../main]{subfiles}\n\\begin{document}\n\n\\end{document}'
-SUB_BOOK = '\documentclass[../../../main]{subfiles}\n\\begin{document}\n\n\\end{document}'
-
 compile:
 	cd $(NAME); latexmk
 
