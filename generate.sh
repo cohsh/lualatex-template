@@ -6,6 +6,11 @@ optional_preamble=""
 
 if [ "$class" != "beamer" ]; then
     option="11pt, a4paper"
+    optional_preamble=""
+    maketitle=$(cat << EOF
+    \maketitle
+EOF
+)
 else
     option="11pt"
     optional_preamble=$(cat << EOF
@@ -22,6 +27,12 @@ else
         \vfill
     \end{frame}
 }
+EOF
+)
+    maketitle=$(cat << EOF
+    \begin{frame}
+        \titlepage
+    \end{frame}
 EOF
 )
 fi
@@ -48,24 +59,20 @@ $optional_preamble
 
 \begin{luacode*}
     local core = require("./utility/core")
-    local input = require("./input")
-
-    maketitle = require("./utility/maketitle")
-    maketitle:set()
 \end{luacode*}
 
 \graphicspath{{./fig/}}
 
-\begin{document}
+\title{}
+\author{}
+\date{\today}
 
-    \begin{luacode*}
-        maketitle:execute()
-    \end{luacode*}
+\begin{document}
+$maketitle
 
     \tableofcontents
 
     \begin{luacode*}
-        local core = require("./utility/core")
         local load = require("./utility/load")
         local subfile = load.SubFile:new("sub", 0, 10)
         subfile:$load()
