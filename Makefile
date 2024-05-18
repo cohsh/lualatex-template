@@ -14,7 +14,7 @@ common:
 	@cp .latexmkrc $(NAME)/.
 	@cp input.lua $(NAME)/.
 	@cp -r utility/ ${NAME}/.
-	@cp -r sty ${NAME}/.
+	@cp -r sty/ ${NAME}/.
 	@cp .gitignore ${NAME}/.
 
 # Basic
