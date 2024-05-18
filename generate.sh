@@ -42,7 +42,7 @@ fi
 
 cat << EOF
 \documentclass[$option]{$class}
-\usepackage{../sty/cohsh-common}
+\usepackage{./sty/cohsh-common}
 
 $optional_preamble
 
