@@ -16,6 +16,7 @@ common:
 	@cd $(NAME); touch main.bib; mkdir sub; mkdir fig;
 	@cp .latexmkrc $(NAME)/.
 	@cp input.lua $(NAME)/.
+	@cp .gitignore ${NAME}/.
 
 # Basic
 book: common
