@@ -22,7 +22,8 @@ A LuaLaTeX Template with Subfiles Package
 │       ├── article.tex
 │       ├── beamer.tex
 │       ├── book.tex
-│       └── report.tex
+│       ├── report.tex
+│       └── revtex.tex
 ├── sty
 │   └── common.sty
 └── utility
@@ -72,6 +73,9 @@ The generated `main.pdf` is at `./src-test/cache/main.pdf`
 
 - Slide
   - `beamer.cls`
+
+- REVTeX
+  - `revtex4-2.cls`
 
 - Japanese
   - `ltjsbook.cls`
