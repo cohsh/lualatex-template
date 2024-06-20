@@ -58,4 +58,13 @@ function load.SubFile:beamer()
     end
 end
 
+function load.SubFile:revtex()
+    for i = self.n_range_min, self.n_range_max do
+        local path = self.sub .. "/" .. self.section .. i .. ".tex"
+        if core.file_exists(path) then
+            tex.sprint(core.command("subfile", path))
+        end
+    end
+end
+
 return load

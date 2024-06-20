@@ -53,5 +53,10 @@ beamer: common
 	@./generate.sh beamer > $(NAME)/main.tex
 	@for i in `seq $(N_INCLUDE_MIN) $(N_INCLUDE_MAX)`; do cp $(PARTS_SUB_DIR)/beamer.tex $(NAME)/sub/section$$i.tex; done
 
+# For REVTeX
+revtex: common
+	@./generate.sh revtex > $(NAME)/main.tex
+	@for i in `seq $(N_INCLUDE_MIN) $(N_INCLUDE_MAX)`; do cp $(PARTS_SUB_DIR)/revtex.tex $(NAME)/sub/section$$i.tex; done
+
 clean:
 	rm -rf $(NAME)

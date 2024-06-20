@@ -4,10 +4,29 @@ class=$1
 option=""
 optional_preamble=""
 
-if [ "$class" != "beamer" ]; then
+if [ "$class" != "beamer" ] && [ "$class" != "revtex" ]; then
     option="11pt, a4paper"
     optional_preamble=""
     maketitle=$(cat << EOF
+    \title{}
+    \author{}
+    \date{\today}
+
+    \maketitle
+EOF
+)
+elif [ "$class" = "revtex" ]; then
+    option="reprint, aps"
+    optional_preamble=""
+    maketitle=$(cat << EOF
+    \title{}
+
+    \author{}
+    \affiliation{}
+    \email{}
+
+    \date{\today}
+
     \maketitle
 EOF
 )
@@ -30,6 +49,10 @@ else
 EOF
 )
     maketitle=$(cat << EOF
+    \title{}
+    \author{}
+    \date{\today}
+
     \begin{frame}
         \titlepage
     \end{frame}
@@ -51,6 +74,11 @@ elif [[ "${reports[(Ie)$class]}" -ne 0 ]]; then
     load="report"
 fi
 
+if [ "$class" = "revtex" ]; then
+    class="revtex4-2"
+    load="revtex"
+fi
+
 cat << EOF
 \documentclass[$option]{$class}
 \usepackage{./sty/common}
@@ -62,10 +90,6 @@ $optional_preamble
 \end{luacode*}
 
 \graphicspath{{./fig/}}
-
-\title{}
-\author{}
-\date{\today}
 
 \begin{document}
 $maketitle
