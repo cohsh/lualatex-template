@@ -2,23 +2,13 @@
 
 class=$1
 option=""
+optional_usepackage=""
 optional_preamble=""
 
-if [ "$class" != "beamer" ] && [ "$class" != "revtex" ]; then
-    option="11pt, a4paper"
-    optional_preamble=""
-    maketitle=$(cat << EOF
-    \title{}
-    \author{}
-    \date{\today}
-
-    \maketitle
-EOF
-)
-elif [ "$class" = "revtex" ]; then
-    option="reprint, aps"
-    optional_preamble=""
-    maketitle=$(cat << EOF
+case "$class" in
+    "revtex")
+        option="twocolumn"
+        maketitle=$(cat << EOF
     \title{}
 
     \author{}
@@ -29,10 +19,10 @@ elif [ "$class" = "revtex" ]; then
 
     \maketitle
 EOF
-)
-else
-    option="11pt"
-    optional_preamble=$(cat << EOF
+);;
+    "beamer")
+        option="11pt"
+        optional_preamble=$(cat << EOF
 \usetheme{Berkeley}
 \usecolortheme[RGB={0,91,152}]{structure}
 
@@ -48,7 +38,7 @@ else
 }
 EOF
 )
-    maketitle=$(cat << EOF
+        maketitle=$(cat << EOF
     \title{}
     \author{}
     \date{\today}
@@ -57,31 +47,50 @@ EOF
         \titlepage
     \end{frame}
 EOF
-)
-fi
+);;
+    *)
+        option="11pt, a4paper"
+        maketitle=$(cat << EOF
+    \title{}
+    \author{}
+    \date{\today}
 
-books=("book" "ltjsbook")
-articles=("article" "ltjsarticle")
-reports=("report" "ltjsreport")
+    \maketitle
+EOF
+);;
+esac
 
-load="beamer"
+case "$class" in
+    "ltjsbook"|"ltjsarticle"|"ltjsreport"|"beamer")
+        optional_usepackage=$(cat << EOF
+\usepackage{luatexja}
+EOF
+);;
+esac
 
-if [[ "${books[(Ie)$class]}" -ne 0 ]]; then
-    load="book"
-elif [[ "${articles[(Ie)$class]}" -ne 0 ]]; then
-    load="article"
-elif [[ "${reports[(Ie)$class]}" -ne 0 ]]; then
-    load="report"
-fi
-
-if [ "$class" = "revtex" ]; then
-    class="revtex4-2"
-    load="revtex"
-fi
+case "$class" in
+    "book"|"ltjsbook")
+        load="book"
+        ;;
+    "article"|"ltjsarticle")
+        load="article"
+        ;;
+    "report"|"ltjsreport")
+        load="report"
+        ;;
+    "beamer")
+        load="beamer"
+        ;;
+    "revtex")
+        load="revtex"
+        class="revtex4-2"
+        ;;
+esac
 
 cat << EOF
 \documentclass[$option]{$class}
 \usepackage{./sty/common}
+$optional_usepackage
 
 $optional_preamble
 
