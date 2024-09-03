@@ -38,9 +38,9 @@ A LuaLaTeX Template with Subfiles Package
 - `utility/*`: utility Lua codes
 
 ## Usage for `article.cls`
-### 1. Generate `src-test/`
+### 1. Generate files
 ```shell
-make article NAME="src-test"
+make article
 ```  
 
 ### 2. Edit
@@ -53,17 +53,15 @@ make article NAME="src-test"
   #### 2.2 Please edit `sub/*` as you like.
 
 ### 3. Build
-  #### At `.`
-  ```shell
-  make NAME="src-test"
-  ```
+```shell
+make
+```
+or
+```shell
+latexmk
+```
 
-  #### At `./src-test`
-  ```shell
-  latexmk
-  ```
-
-The generated `main.pdf` is at `./src-test/cache/main.pdf`
+The generated `main.pdf` is at `cache/main.pdf`
 
 ## Supported Classes
 - Basic
