@@ -21,10 +21,44 @@ case "$class" in
 EOF
 );;
     "beamer")
-        option="11pt"
+        option="8pt"
         optional_preamble=$(cat << EOF
-\usetheme{Berkeley}
-\usecolortheme[RGB={0,91,152}]{structure}
+\usetheme{Madrid}
+
+\definecolor{tabblue}{RGB}{31,119,180}
+\definecolor{taborange}{RGB}{255,127,14}
+\definecolor{tabgreen}{RGB}{44,160,44}
+\definecolor{tabpurple}{RGB}{148,103,189}
+\definecolor{tabred}{RGB}{214,39,40}
+
+\usecolortheme[named=tabblue]{structure}
+
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{navigation symbols}{}
+
+\setbeamersize{text margin left=5pt, text margin right=5pt}
+
+\setbeamercolor{page number in head/foot}{fg=tabblue}
+\setbeamercolor{block title}{bg=tabblue}
+\setbeamercolor{block title alerted}{bg=taborange}
+\setbeamercolor{block title example}{bg=tabgreen}
+
+\setbeamerfont{normal text}{size=\tiny}
+\setbeamerfont{page number in head/foot}{family=\ttfamily, size=\normalsize}
+\setbeamerfont{frametitle}{size=\large}
+\setbeamerfont{title}{size=\Large}
+\setbeamerfont{block title}{size=\normalsize}
+
+\newenvironment<>{specialblock}[1]{%
+  \begin{actionenv}#2%
+    \def\insertblocktitle{#1}%
+    \par%
+    \mode<presentation>{%
+      \setbeamercolor{block title}{bg=tabred}
+      \setbeamercolor{block body}{bg=tabred!10}
+    }%
+    \usebeamertemplate{block begin}}
+  {\par\usebeamertemplate{block end}\end{actionenv}}
 
 \AtBeginSection[]{
     \begin{frame}
