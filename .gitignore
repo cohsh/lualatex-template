@@ -10,5 +10,8 @@
 *.out
 *.nav
 *.snm
+*.dvi
 
 cache/
+
+.DS_Store
