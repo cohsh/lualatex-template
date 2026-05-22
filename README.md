@@ -16,6 +16,7 @@ A LuaLaTeX Template with Subfiles Package
 ## Components
 ```
 .
+├── LICENSE
 ├── Makefile
 ├── README.md
 ├── generate.sh
@@ -109,6 +110,7 @@ make distclean
 ├── main.bib
 ├── main.tex
 ├── sty
+│   ├── beamer.sty
 │   └── common.sty
 ├── sub
 │   └── part1
@@ -144,11 +146,11 @@ make distclean
 
 \graphicspath{{./fig/}}
 
-\title{}
-\author{}
-\date{\today}
-
 \begin{document}
+    \title{}
+    \author{}
+    \date{\today}
+
     \maketitle
 
     \tableofcontents
@@ -171,6 +173,28 @@ make distclean
 \documentclass[../../main]{subfiles}
 \begin{document}
 
+\end{document}
+```
+
+### Single-file mode
+`make <class>-single` generates only `main.tex` (no `sub/` directory). The
+subfile-loading `luacode*` block is replaced by a placeholder where you write
+the body directly:
+
+```latex
+\begin{document}
+    \title{}
+    \author{}
+    \date{\today}
+
+    \maketitle
+
+    \tableofcontents
+
+    % Write your content here.
+
+    \bibliography{main}
+    \bibliographystyle{unsrt}
 \end{document}
 ```
 
