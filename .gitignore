@@ -14,4 +14,6 @@
 
 cache/
 
+.claude/
+
 .DS_Store

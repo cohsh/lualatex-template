@@ -12,6 +12,7 @@ A LuaLaTeX Template with Subfiles Package
 - [x] Automatic loads of sub `.tex` files by using `luacode*`
 - [x] `\usepackage` directives organized in `sty/*.sty`
 - [x] Single-file mode for small documents (`make <class>-single`)
+- [x] Optional auto-compile hook for Claude Code (`make claude-hook`)
 
 ## Components
 ```
@@ -19,6 +20,9 @@ A LuaLaTeX Template with Subfiles Package
 ├── LICENSE
 ├── Makefile
 ├── README.md
+├── claude
+│   ├── compile-latex.sh
+│   └── settings.hooks.json
 ├── generate.sh
 ├── parts
 │   └── sub
@@ -37,6 +41,7 @@ A LuaLaTeX Template with Subfiles Package
 ```
 
 - `generate.sh`: use for generating `main.tex` in `Makefile`
+- `claude/*`: Claude Code auto-compile hook, installed on demand by `make claude-hook`
 - `parts/sub/*`: use for generating sub `.tex` files in `Makefile`
 - `sty/common.sty`: `\usepackage` shared by all classes
 - `sty/beamer.sty`: `\usepackage`, theme, and environments for the `beamer` class
@@ -101,6 +106,19 @@ make distclean
   - `ltjsbook.cls`
   - `ltjsarticle.cls`
   - `ltjsreport.cls`
+
+## Claude Code integration (optional)
+If you edit `.tex` files with [Claude Code](https://claude.com/claude-code),
+install the auto-compile hook once so the PDF rebuilds after every edit:
+```shell
+make claude-hook
+```
+This copies a `PostToolUse` hook into `.claude/`, which is git-ignored and local
+to your working copy — other users and editors are unaffected. Requires `jq` and
+`latexmk`.
+
+Run it once per clone: it is independent of `make <class>` and is kept by
+`make distclean`, so it never needs to be re-installed.
 
 ## Note
 ### Generated files for `article.cls`

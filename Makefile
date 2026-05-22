@@ -11,7 +11,7 @@ ARTIFACTS = main.aux main.bbl main.blg main.dvi main.fdb_latexmk main.fls \
 # pattern rule below) sets SINGLE=1 to generate a single-file document instead.
 GEN_MODE = $(if $(SINGLE),single,subfiles)
 
-.PHONY: compile common clean distclean \
+.PHONY: compile common clean distclean claude-hook \
         book report article ltjsbook ltjsreport ltjsarticle beamer revtex
 
 compile:
@@ -30,6 +30,17 @@ clean:
 distclean: clean
 	rm -f main.tex main.bib
 	rm -rf sub fig
+
+# Install the LaTeX auto-compile hook for Claude Code users (opt-in, local only).
+# .claude/ is git-ignored, so this affects only your working copy.
+claude-hook:
+	@mkdir -p .claude/hooks
+	@cp claude/compile-latex.sh .claude/hooks/compile-latex.sh
+	@chmod +x .claude/hooks/compile-latex.sh
+	@test -f .claude/settings.json \
+		&& echo "note: .claude/settings.json exists -- merge claude/settings.hooks.json into its PostToolUse manually" \
+		|| cp claude/settings.hooks.json .claude/settings.json
+	@echo "Claude Code auto-compile hook installed in .claude/ (edit a .tex file to trigger latexmk)."
 
 # Single-file variant of any class target: `make article-single`, etc.
 %-single:
