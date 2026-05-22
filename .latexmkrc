@@ -1,4 +1,4 @@
-#!usr/bin/env perl
+#!/usr/bin/env perl
 $latex = 'lualatex -synctex=1 -interaction=nonstopmode -file-line-error %S';
 $bibtex = 'bibtex';
 $makeindex = 'mendex %O -o %D %S';

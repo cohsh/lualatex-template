@@ -1,0 +1,14 @@
+{
+    // Ignore the parts/ stub files when detecting the root document.
+    // They are copy templates, never compiled directly; main.tex (generated
+    // at the project root) is the only real root document.
+    "latex-workshop.latex.search.rootFiles.exclude": ["parts/**"],
+
+    // Keep single-subfile compilation enabled: with main.tex fixed as the
+    // root, building a sub/*.tex file runs from the project root, so the
+    // relative paths in main.tex's preamble (./sty/common, ../main) resolve.
+    "latex-workshop.latex.rootFile.useSubFile": true,
+
+    // Match .latexmkrc: build artifacts go to cache/.
+    "latex-workshop.latex.outDir": "cache"
+}

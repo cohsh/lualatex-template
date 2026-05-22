@@ -1,9 +1,30 @@
-#!/bin/zsh
+#!/usr/bin/env bash
 
 class=$1
+mode=${2:-subfiles}
 option=""
 optional_usepackage=""
 optional_preamble=""
+
+case "$class" in
+    book|article|report|ltjsbook|ltjsarticle|ltjsreport|beamer|revtex)
+        ;;
+    *)
+        echo "Error: unknown or missing document class: '${class}'" >&2
+        echo "Usage: ${0##*/} <class> [subfiles|single]" >&2
+        echo "  class: book|article|report|ltjsbook|ltjsarticle|ltjsreport|beamer|revtex" >&2
+        exit 1
+        ;;
+esac
+
+case "$mode" in
+    subfiles|single)
+        ;;
+    *)
+        echo "Error: unknown mode: '${mode}' (expected 'subfiles' or 'single')" >&2
+        exit 1
+        ;;
+esac
 
 case "$class" in
     "revtex")
@@ -21,57 +42,8 @@ case "$class" in
 EOF
 );;
     "beamer")
-        option="8pt"
-        optional_preamble=$(cat << EOF
-\usetheme{Madrid}
-
-\definecolor{tabblue}{RGB}{31,119,180}
-\definecolor{taborange}{RGB}{255,127,14}
-\definecolor{tabgreen}{RGB}{44,160,44}
-\definecolor{tabpurple}{RGB}{148,103,189}
-\definecolor{tabred}{RGB}{214,39,40}
-
-\usecolortheme[named=tabblue]{structure}
-
-\setbeamertemplate{footline}[frame number]
-\setbeamertemplate{navigation symbols}{}
-
-\setbeamersize{text margin left=5pt, text margin right=5pt}
-
-\setbeamercolor{page number in head/foot}{fg=tabblue}
-\setbeamercolor{block title}{bg=tabblue}
-\setbeamercolor{block title alerted}{bg=taborange}
-\setbeamercolor{block title example}{bg=tabgreen}
-
-\setbeamerfont{normal text}{size=\tiny}
-\setbeamerfont{page number in head/foot}{family=\ttfamily, size=\normalsize}
-\setbeamerfont{frametitle}{size=\large}
-\setbeamerfont{title}{size=\Large}
-\setbeamerfont{block title}{size=\normalsize}
-
-\newenvironment<>{specialblock}[1]{%
-  \begin{actionenv}#2%
-    \def\insertblocktitle{#1}%
-    \par%
-    \mode<presentation>{%
-      \setbeamercolor{block title}{bg=tabred}
-      \setbeamercolor{block body}{bg=tabred!10}
-    }%
-    \usebeamertemplate{block begin}}
-  {\par\usebeamertemplate{block end}\end{actionenv}}
-
-\AtBeginSection[]{
-    \begin{frame}
-        \vfill
-        \centering
-        \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
-            \usebeamerfont{title}\insertsectionhead\par%
-        \end{beamercolorbox}
-        \vfill
-    \end{frame}
-}
-EOF
-)
+        option="aspectratio=169,10pt"
+        optional_preamble='\usepackage{./sty/beamer}'
         maketitle=$(cat << EOF
     \title{}
     \author{}
@@ -121,6 +93,19 @@ case "$class" in
         ;;
 esac
 
+if [ "$mode" = "subfiles" ]; then
+    body=$(cat << EOF
+    \begin{luacode*}
+        local load = require("./utility/load")
+        local subfile = load.SubFile:new("sub", 0, 10)
+        subfile:$load()
+    \end{luacode*}
+EOF
+)
+else
+    body="    % Write your content here."
+fi
+
 cat << EOF
 \documentclass[$option]{$class}
 \usepackage{./sty/common}
@@ -130,6 +115,7 @@ $optional_preamble
 
 \begin{luacode*}
     local core = require("./utility/core")
+    local figure = require("./utility/figure")
 \end{luacode*}
 
 \graphicspath{{./fig/}}
@@ -139,12 +125,8 @@ $maketitle
 
     \tableofcontents
 
-    \begin{luacode*}
-        local load = require("./utility/load")
-        local subfile = load.SubFile:new("sub", 0, 10)
-        subfile:$load()
-    \end{luacode*}
-    
+$body
+
     \bibliography{main}
     \bibliographystyle{unsrt}
 

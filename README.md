@@ -1,6 +1,7 @@
 # LuaLaTeX Template
 ![Static Badge](https://img.shields.io/badge/LuaLaTeX-green?logo=latex)
-![GitHub top language](https://img.shields.io/github/languages/top/cohsh/latex-template?logo=lua)
+![GitHub top language](https://img.shields.io/github/languages/top/cohsh/lualatex-template?logo=lua)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 A LuaLaTeX Template with Subfiles Package
 
@@ -9,7 +10,8 @@ A LuaLaTeX Template with Subfiles Package
 - [x] The text is written in sub `.tex` files.
 - [x] Automatic generation of main and sub `.tex` files
 - [x] Automatic loads of sub `.tex` files by using `luacode*`
-- [x] Not redundant `\usepackage` (`./sty/common.sty` only)
+- [x] `\usepackage` directives organized in `sty/*.sty`
+- [x] Single-file mode for small documents (`make <class>-single`)
 
 ## Components
 ```
@@ -25,6 +27,7 @@ A LuaLaTeX Template with Subfiles Package
 │       ├── report.tex
 │       └── revtex.tex
 ├── sty
+│   ├── beamer.sty
 │   └── common.sty
 └── utility
     ├── core.lua
@@ -34,7 +37,8 @@ A LuaLaTeX Template with Subfiles Package
 
 - `generate.sh`: use for generating `main.tex` in `Makefile`
 - `parts/sub/*`: use for generating sub `.tex` files in `Makefile`
-- `sty/common.sty`: listing of `\usepackage`
+- `sty/common.sty`: `\usepackage` shared by all classes
+- `sty/beamer.sty`: `\usepackage`, theme, and environments for the `beamer` class
 - `utility/*`: utility Lua codes
 
 ## Usage for `article.cls`
@@ -43,6 +47,12 @@ A LuaLaTeX Template with Subfiles Package
 make article
 ```  
 
+For a small document, generate a single-file version (no `sub/`, write directly
+in `main.tex`). This works for any class, e.g. `make beamer-single`:
+```shell
+make article-single
+```
+
 ### 2. Edit
   #### 2.1 Please edit `main.tex` for `\maketitle`.
   ```latex
@@ -50,7 +60,7 @@ make article
   \author{}
   \date{\today}
   ```
-  #### 2.2 Please edit `sub/*` as you like.
+  #### 2.2 Please edit `sub/*` as you like (subfiles version), or write directly in `main.tex` (single-file version).
 
 ### 3. Build
 ```shell
@@ -62,6 +72,17 @@ latexmk
 ```
 
 The generated `main.pdf` is at `cache/main.pdf`
+
+### 4. Clean
+Remove build artifacts (`cache/` and stray `main.*` outputs), keeping your document:
+```shell
+make clean
+```
+Remove every generated file and return to the pristine template state.
+**Warning: this deletes `main.tex`, `main.bib`, `sub/` and `fig/`.**
+```shell
+make distclean
+```
 
 ## Supported Classes
 - Basic
@@ -118,6 +139,7 @@ The generated `main.pdf` is at `cache/main.pdf`
 
 \begin{luacode*}
     local core = require("./utility/core")
+    local figure = require("./utility/figure")
 \end{luacode*}
 
 \graphicspath{{./fig/}}
@@ -151,3 +173,6 @@ The generated `main.pdf` is at `cache/main.pdf`
 
 \end{document}
 ```
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

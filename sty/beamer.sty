@@ -1,0 +1,111 @@
+% beamer.sty -- packages, theme, colors, and environments for the beamer class.
+% Loaded only by beamer documents (see generate.sh). xcolor and etoolbox are
+% intentionally omitted: the beamer class already loads them.
+
+\usepackage{luatexja-fontspec}
+\usepackage{fontspec}
+% Japanese fonts: Hiragino on macOS, fall back to Harano Aji (bundled with TeX Live)
+\IfFontExistsTF{Hiragino Kaku Gothic ProN}{%
+    \setmainjfont{Hiragino Kaku Gothic ProN}
+    \setsansjfont{Hiragino Kaku Gothic ProN}
+}{%
+    \setmainjfont{HaranoAjiGothic-Regular.otf}
+    \setsansjfont{HaranoAjiGothic-Regular.otf}
+}
+% Latin fonts: Helvetica Neue on macOS, fall back to TeX Gyre Heros (bundled with TeX Live)
+\IfFontExistsTF{Helvetica Neue}{%
+    \setmainfont{Helvetica Neue}[
+        BoldFont       = Helvetica Neue Bold,
+        ItalicFont     = Helvetica Neue Italic,
+        BoldItalicFont = Helvetica Neue Bold Italic,
+    ]
+    \setsansfont{Helvetica Neue}[
+        BoldFont       = Helvetica Neue Bold,
+        ItalicFont     = Helvetica Neue Italic,
+        BoldItalicFont = Helvetica Neue Bold Italic,
+    ]
+}{%
+    \setmainfont{TeX Gyre Heros}
+    \setsansfont{TeX Gyre Heros}
+}
+\usepackage{listings}
+\usepackage{colortbl}
+\usepackage{caption}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{booktabs}
+\usepackage{pifont}
+\usepackage{appendixnumberbeamer}
+\usepackage{multirow}
+\usepackage{adjustbox}
+
+\usetikzlibrary{shapes.geometric, arrows, calc, positioning}
+
+\setbeamerfont{normal text}{size=\normalsize}
+\setbeamerfont{frametitle}{size=\large}
+\setbeamersize{text margin left=5pt, text margin right=5pt}
+
+% Color palette
+\definecolor{oxfordblue}{RGB}{0,32,91}
+\definecolor{carmine}{RGB}{150,0,24}
+\definecolor{forestgreen}{RGB}{53,94,59}
+\definecolor{bodygray}{RGB}{51,51,51}
+
+\usetheme{Madrid}
+\usecolortheme[named=oxfordblue]{structure}
+\setbeamercolor{normal text}{fg=bodygray}
+
+\setbeamertemplate{title page}[default][colsep=-4bp,rounded=false,shadow=false]
+\setbeamercolor{title}{bg=,fg=oxfordblue}
+\setbeamercolor{author}{bg=,fg=bodygray}
+\setbeamercolor{institute}{bg=,fg=bodygray}
+
+\setbeamertemplate{footline}{}
+\setbeamerfont{frametitle}{size=\large}
+\setbeamerfont{title}{size=\Large}
+\setbeamerfont{author}{size=\small}
+\setbeamerfont{institute}{size=\scriptsize}
+\setbeamerfont{block title}{size=\normalsize, series=\bfseries}
+% Flat block style: colored bold title + thin rule, no fills
+\setbeamercolor{block title}{bg=, fg=oxfordblue}
+\setbeamercolor{block body}{bg=, fg=}
+\setbeamercolor{block title alerted}{bg=, fg=carmine}
+\setbeamercolor{block body alerted}{bg=, fg=}
+\setbeamercolor{block title example}{bg=, fg=forestgreen}
+\setbeamercolor{block body example}{bg=, fg=}
+
+\setbeamertemplate{block begin}{%
+    \par\vskip0.3em%
+    {\usebeamerfont*{block title}\usebeamercolor[fg]{block title}\insertblocktitle\par}%
+    {\color{oxfordblue}\hrule height 0.5pt}%
+    \vskip0.3em%
+}
+\setbeamertemplate{block end}{\par\vskip0.5em}
+
+\setbeamertemplate{block alerted begin}{%
+    \par\vskip0.3em%
+    {\usebeamerfont*{block title alerted}\usebeamercolor[fg]{block title alerted}\insertblocktitle\par}%
+    {\color{carmine}\hrule height 0.5pt}%
+    \vskip0.3em%
+}
+\setbeamertemplate{block alerted end}{\par\vskip0.5em}
+
+\setbeamertemplate{block example begin}{%
+    \par\vskip0.3em%
+    {\usebeamerfont*{block title example}\usebeamercolor[fg]{block title example}\insertblocktitle\par}%
+    {\color{forestgreen}\hrule height 0.5pt}%
+    \vskip0.3em%
+}
+\setbeamertemplate{block example end}{\par\vskip0.5em}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize item}{\textcolor{gray}{$\blacktriangleright$}}
+\setbeamertemplate{itemize subitem}{\textcolor{gray}{\scriptsize$\blacktriangleright$}}
+
+\setbeamercolor{alerted text}{fg=carmine}
+
+\newenvironment{proslist}{%
+    \begin{itemize}\setbeamertemplate{itemize item}{\textcolor{oxfordblue}{\ding{51}}}%
+}{\end{itemize}}
+\newenvironment{conslist}{%
+    \begin{itemize}\setbeamertemplate{itemize item}{\textcolor{carmine}{\ding{55}}}%
+}{\end{itemize}}

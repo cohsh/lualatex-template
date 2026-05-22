@@ -2,10 +2,11 @@ package.preload['core'] = function()
     local core = {}
 
     function core.file_exists(path)
-        local file_hundle, error_str, error_code = io.open(path, "rb")
-        if file_hundle == nil then
+        local file_handle = io.open(path, "rb")
+        if file_handle == nil then
             return false
         else
+            file_handle:close()
             return true
         end
     end
