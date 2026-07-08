@@ -51,6 +51,7 @@ EOF
 
     \begin{frame}
         \titlepage
+        \aiassistcredit
     \end{frame}
 EOF
 );;

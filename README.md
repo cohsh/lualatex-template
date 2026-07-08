@@ -23,6 +23,11 @@ A LuaLaTeX Template with Subfiles Package
 ├── claude
 │   ├── compile-latex.sh
 │   └── settings.hooks.json
+├── assets
+│   └── fig
+│       ├── claude_ai_logo.{pdf,svg}
+│       ├── codex_icon.{pdf,svg}
+│       └── codex_logo.{pdf,svg}
 ├── generate.sh
 ├── parts
 │   └── sub
@@ -41,11 +46,15 @@ A LuaLaTeX Template with Subfiles Package
 ```
 
 - `generate.sh`: use for generating `main.tex` in `Makefile`
+- `assets/fig/*`: reusable figures copied into `fig/` by `make <class>`
 - `claude/*`: Claude Code auto-compile hook, installed on demand by `make claude-hook`
 - `parts/sub/*`: use for generating sub `.tex` files in `Makefile`
 - `sty/common.sty`: `\usepackage` shared by all classes
 - `sty/beamer.sty`: `\usepackage`, theme, and environments for the `beamer` class
 - `utility/*`: utility Lua codes
+
+For `beamer`, the generated title slide calls `\aiassistcredit`, which places
+the `Created with Claude and Codex` credit and logos in the lower-right corner.
 
 ## Usage for `article.cls`
 ### 1. Generate files

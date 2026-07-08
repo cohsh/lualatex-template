@@ -2,6 +2,7 @@ N_INCLUDE_MIN = 0
 N_INCLUDE_MAX = 10
 
 PARTS_SUB_DIR = parts/sub
+FIG_ASSET_DIR = assets/fig
 
 # Build artifacts produced by latexmk / lualatex
 ARTIFACTS = main.aux main.bbl main.blg main.dvi main.fdb_latexmk main.fls \
@@ -18,7 +19,8 @@ compile:
 	latexmk
 
 common:
-	@touch main.bib; mkdir -p fig;
+	@touch main.bib; mkdir -p fig; \
+	if [ -d "$(FIG_ASSET_DIR)" ]; then cp -R "$(FIG_ASSET_DIR)/." fig/; fi
 
 # Remove build artifacts only (your document sources are kept)
 clean:

@@ -5,6 +5,7 @@
 *.fls
 *.log
 *.pdf
+!assets/fig/*.pdf
 *.synctex.gz
 *.toc
 *.out

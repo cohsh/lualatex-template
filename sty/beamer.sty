@@ -101,6 +101,25 @@
 \setbeamertemplate{itemize item}{\textcolor{gray}{$\blacktriangleright$}}
 \setbeamertemplate{itemize subitem}{\textcolor{gray}{\scriptsize$\blacktriangleright$}}
 
+\newcommand{\aiassistcredit}{%
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[
+            anchor=south east,
+            xshift=-0.45cm,
+            yshift=0.60cm,
+            inner sep=0pt,
+            align=right
+        ] at (current page.south east) {%
+            {\scriptsize\color{oxfordblue!70}Created with Claude and Codex}\\[-0.04em]
+            \includegraphics[height=0.31cm]{claude_ai_logo}%
+            \hspace{0.14cm}%
+            \includegraphics[height=0.30cm]{codex_icon}%
+            \hspace{0.03cm}%
+            \includegraphics[height=0.22cm]{codex_logo}%
+        };
+    \end{tikzpicture}%
+}
+
 \setbeamercolor{alerted text}{fg=carmine}
 
 \newenvironment{proslist}{%
